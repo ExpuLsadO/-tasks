@@ -44,7 +44,7 @@ def DataFrame_id(id):
 
     json_data1 = json_data1['viewers']
 
-    df = pd.DataFrame(json_data1,  index=None, columns=None, dtype=None, copy=False)
+    df = pd.DataFrame(json_data1)
 
     print(df)
     

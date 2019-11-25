@@ -1,6 +1,8 @@
 import pandas as pd
 import json
 import requests
+from google.cloud import bigquery
+from google.oauth2 import service_account
 
 pd.options.display.max_rows = 5000
 pd.options.display.max_columns = 5000
@@ -51,7 +53,7 @@ def reports (id):
 
  
 
-def messseges (id):
+def messages (id):
     get_report = url3 + id 
 
     get_report = requests.get(get_report, headers = bizon_headers) 
@@ -98,14 +100,13 @@ elements_in_list = len(json_data['list'])
 webid = ""
 index = 0
 c_live = 0
-while index < elements_in_list and c_live !=2: # отчет есть только о первых двух вебинарах
-    
+while index < elements_in_list and c_live !=2: # отчет есть только о первых двух вебинарах(на 25.11.2019 нет ни одного доступного отчета)
     if json_data['list'][index]['type'] == "LiveWebinars":
         webid = json_data['list'][index]['webinarId']
         
         d = reports(webid)
         
-        d_m = messseges(webid)
+        d_m = messages(webid)
 
         if c_live == 0:
             Df = d
@@ -118,8 +119,18 @@ while index < elements_in_list and c_live !=2: # отчет есть тольк�
 
     index += 1
 
-print(df)
-print("\n\n\n")
-print(Df)
-print("\n\n\n")
-print(Df_m)
+# таблица с информацией о всех вебах(уже создана)
+df.to_gbq('dataset.webinars', project_id = 'expulsado-project', if_exists = 'append', private_key = 'C:\\Users\\Александр\\Downloads\\My Project -6896200f98d3.json')
+
+# таблица с информацией о всех комментариях (не добавлена в bigquery, так как нет доступа отчетам по вебам)
+Df_m.to_gbq('dataset.messages', project_id = 'expulsado-project', if_exists = 'append', private_key = 'C:\\Users\\Александр\\Downloads\\My Project -6896200f98d3.json')
+
+# таблица с информацией о пользователях со всех вебов (не добавлена в bigquery, так как нет доступа отчетам по вебам)
+Df.to_gbq('dataset.reports', project_id = 'expulsado-project', if_exists = 'append', private_key = 'C:\\Users\\Александр\\Downloads\\My Project -6896200f98d3.json')
+
+# проверка на то, что отдает каждая из функций 
+# print(df)
+# print("\n\n\n")
+# print(Df)
+# print("\n\n\n")
+# print(Df_m)

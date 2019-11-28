@@ -7,7 +7,8 @@ from google.oauth2 import service_account
 pd.options.display.max_rows = 5000
 pd.options.display.max_columns = 5000
 
-bizon_token = 'Bxt5aOu9rSlgKq6dd9rre-F9TduqrBxGYca_OqrBgQK9pdO5r'
+# bizon_token = 'Bxt5aOu9rSlgKq6dd9rre-F9TduqrBxGYca_OqrBgQK9pdO5r' # по этому ключу нет статистики о живых вебах 
+bizon_token = 'BZJXh2jnBr-e172nshHH-bJQhns2BrWMy732i2BBW71mn3jnB'
 
 bizon_headers = {'X-Token': bizon_token}
 
@@ -100,7 +101,7 @@ elements_in_list = len(json_data['list'])
 webid = ""
 index = 0
 c_live = 0
-while index < elements_in_list and c_live !=2: # отчет есть только о первых двух вебинарах(на 25.11.2019 нет ни одного доступного отчета)
+while index < elements_in_list and c_live !=1: # отчет есть только о первых двух вебинарах(на 25.11.2019 нет ни одного доступного отчета)
     if json_data['list'][index]['type'] == "LiveWebinars":
         webid = json_data['list'][index]['webinarId']
         

@@ -121,13 +121,13 @@ while index < elements_in_list and c_live !=1: # отчет есть тольк�
     index += 1
 
 # таблица с информацией о всех вебах(уже создана)
-df.to_gbq('dataset.webinars', project_id = 'expulsado-project', if_exists = 'append', private_key = 'C:\\Users\\Александр\\Downloads\\My Project -6896200f98d3.json')
+df.to_gbq('dataset.webinars', project_id = 'expulsado-project', if_exists = 'replace', private_key = 'C:\\Users\\Александр\\Downloads\\My Project -6896200f98d3.json')
 
 # таблица с информацией о всех комментариях (не добавлена в bigquery, так как нет доступа отчетам по вебам)
-Df_m.to_gbq('dataset.messages', project_id = 'expulsado-project', if_exists = 'append', private_key = 'C:\\Users\\Александр\\Downloads\\My Project -6896200f98d3.json')
+Df_m.to_gbq('dataset.messages', project_id = 'expulsado-project', if_exists = 'replace', private_key = 'C:\\Users\\Александр\\Downloads\\My Project -6896200f98d3.json')
 
 # таблица с информацией о пользователях со всех вебов (не добавлена в bigquery, так как нет доступа отчетам по вебам)
-Df.to_gbq('dataset.reports', project_id = 'expulsado-project', if_exists = 'append', private_key = 'C:\\Users\\Александр\\Downloads\\My Project -6896200f98d3.json')
+Df.to_gbq('dataset.reports', project_id = 'expulsado-project', if_exists = 'replace', private_key = 'C:\\Users\\Александр\\Downloads\\My Project -6896200f98d3.json')
 
 # проверка на то, что отдает каждая из функций 
 # print(df)

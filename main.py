@@ -129,13 +129,13 @@ def main():
         index += 1
 
     # таблица с информацией о всех вебах(уже создана)
-    df.to_gbq('dataset.webinars', project_id = 'expulsado-project', if_exists = 'append', private_key = '/root/flask_app/My Project -6896200f98d3.json')
+    df.to_gbq('dataset.webinars', project_id = 'expulsado-project', if_exists = 'replace', private_key = '/root/flask_app/My Project -6896200f98d3.json')
 
     # таблица с информацией о всех комментариях (не добавлена в bigquery, так как нет доступа отчетам по вебам)
-    Df_m.to_gbq('dataset.messages', project_id = 'expulsado-project', if_exists = 'append', private_key = '/root/flask_app/My Project -6896200f98d3.json')
+    Df_m.to_gbq('dataset.messages', project_id = 'expulsado-project', if_exists = 'replace', private_key = '/root/flask_app/My Project -6896200f98d3.json')
 
     # таблица с информацией о пользователях со всех вебов (не добавлена в bigquery, так как нет доступа отчетам по вебам)
-    Df.to_gbq('dataset.reports', project_id = 'expulsado-project', if_exists = 'append', private_key = '/root/flask_app/My Project -6896200f98d3.json')
+    Df.to_gbq('dataset.reports', project_id = 'expulsado-project', if_exists = 'replace', private_key = '/root/flask_app/My Project -6896200f98d3.json')
     
     def req():
         return requests.get("http://192.168.226.131:86/")
@@ -147,6 +147,7 @@ def main():
     
 
     return "done"
+
 
 if __name__ == "__main__":
     app.run(host = '192.168.226.131', port = 86, debug = True)
@@ -169,6 +170,3 @@ if __name__ == "__main__":
 #         return "Profile page of user #{}".format(id) + " ты первый"
 #     else:
 #         return "Profile page of user #{}".format(id) + " ты второй"
-
-
-# schedule.every().day.at("23:00").do(req)
